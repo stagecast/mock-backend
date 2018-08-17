@@ -13,8 +13,8 @@ module.exports = class Database {
     return q.exec();
   }
 
-  getAll(query = {}, opt = {}) {
-    let q = this.Model.find(query, opt);
+  getAll(query = {}, opt = {}, other = {}) {
+    let q = this.Model.find(query, opt, other);
     return q.exec();
   }
 

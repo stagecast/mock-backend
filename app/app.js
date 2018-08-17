@@ -7,6 +7,7 @@ let config = require('./config')
   // App routes
 const ApiController = require('./controllers/api.controller');
 const BaseController = require('./controllers/base.controller');
+const EventController = require('./controllers/event.controller');
 const WelcomeController = require('./controllers/welcome.controller');
 const UserController = require('./controllers/user.controller');
 
@@ -65,6 +66,7 @@ module.exports = class App {
     let router = express.Router({ mergeParams: true });
 
     let uc = new UserController(this.auth.bind(this));
+    let ec = new EventController(this.auth.bind(this));
     let wc = new WelcomeController();
     let ac = new ApiController();
     let bc = new BaseController();
@@ -74,6 +76,7 @@ module.exports = class App {
     //   .use('/users', userRoutes);
     this.express
       .use('/api/v1/users', uc.getRoutes())
+      .use('/api/v1/events', ec.getRoutes())
       .use('/api/v1/welcome', wc.getRoutes())
       .use('/api/v1', ac.getRoutes())
       .use('/', bc.getRoutes());

@@ -16,19 +16,23 @@
       <div class="col">
         <h1>Stagecast Test</h1>
         <h4 class="italics text-muted">Angular Frontend Developer</h4>
-        <p>Click <a href="https://docs.google.com/document/d/1Vec78NtEvOGi9_VPJFyyBMPT5Enr_dv1S0hOBfqt2sE/edit">here</a> for more info.</p>
 
         <span class="mt30">Note:</span> <br>
-        <p class="lead">This is mockup service used for development. Therefore, it does not offer advanced features and data checks. </p>
+        <p class="lead">This is a mockup service used for development. Therefore, it does not offer advanced features and data checks. </p>
 
         <hr>
       </div>
-
     </div>
-    <div class="row justify-content-center mt30">
+
+    <div class="row justify-content-center">
       <div class="col">
-        <h3>Tasks</h3>
-        <h5>Part 1 - create a sign up journey</h5>
+
+        There are 2 tasks, one where you have to deal with users and one with events. You can decide which of the two you want to do.
+
+        <h3 class="mt30">Task 1</h3>
+        <h5>Part 1 - Create a sign up journey</h5>
+        <p>Click <a href="https://docs.google.com/document/d/1Vec78NtEvOGi9_VPJFyyBMPT5Enr_dv1S0hOBfqt2sE/edit">here</a> for more info.</p>
+
         <p>You will need:</p>
         <ul>
           <li><a href="/api/v1/docs#section0.1">Register Api</a>: sends an email to the specified email.</li>
@@ -37,9 +41,27 @@
           <li> <a href="/api/v1/docs#section0.6">Delete Api (optional)</a>: this api does not require authentication, in this way you can test with your own email. </li>
         </ul>
 
-        <h5>Part 2 - create a test the validates the input form (view 1)</h5>
+        <h5>Part 2 - Create a test to validate the input form (view 1)</h5>
 
         <p>Use the Karma testing tool provided by angular to unit test the first view. What to test is up to your own feelings.</p>
+
+        <h3 class="mt30">Task 2</h3>
+        <h5>Part 1 - events infinite scroll</h5>
+        <p>The number of events can be really high, and keeps growing with time. Moreover, the event document can get extremely heavy. Therefore it is important to provide the list of event while preserving fluidity of experince.</p>
+        <p>Your task is to implement an infite scroll (wiki: <a href="https://en.wiktionary.org/wiki/infinite_scroll">inite scroll</a>) without the aid of a third party library (i.e. not
+          <a href="https://www.npmjs.com/package/ngx-infinite-scroll">this</a>.</p>
+        <p>Of course you can use the library <a href="https://rxjs-dev.firebaseapp.com/">RxJs</a>.</p>
+        <p>As the user scrolls down the page, the website needs to fetch additional events until it reaches the end of the list (or gets tired of scrolling). The content that has already been scolled by can be either left where it is, or deleted and re-fetched
+          as the user scrolls up. The decision depends on your time constraints. </p>
+        <p>To implemnt the functionality, you will need the following api:</p>
+        <ul>
+          <li><a href="/api/v1/docs#section1.1">Get all events Api</a>: with support for pagination</li>
+          <li><a href="/api/v1/docs#section1.2">Get event Api</a></li>
+        </ul>
+
+        <h5>Part 2 - Test the functionality</h5>
+
+        <p>Use the Karma testing tool provided by angular to unit test the view. What to test is up to your own feelings.</p>
       </div>
     </div>
   </div>
