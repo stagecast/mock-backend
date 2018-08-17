@@ -1,0 +1,295 @@
+<html>
+
+<head>
+  <title>Stagecast Test Api Docs</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js" integrity="sha384-pjaaA8dDz/5BgdFUPX6M/9SUZv4d12SUPF0axWc+VRZkx5xU3daN+lYb49+Ax+Tl" crossorigin="anonymous"></script>
+
+  <style>
+    .mt30 {
+      margin-top: 30px;
+    }
+    
+    .highlight {
+      background: #f8f9fa;
+      padding: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="jumbotron">
+    <div class="row justify-content-center">
+      <div class="col-10">
+        <h1 class="display-4">Test Api Docs</h1>
+        <p class="lead">We use this apis for testing.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-10">
+        <h2>User</h2>
+        <div id="section0.1" class="verb mt30">
+          <h2>0.1 Registering a user</h2>
+          <div class="request">
+            <h5>Request</h5>
+            <div class="highlight">
+              <pre>
+POST /api/v1/users/register HTTP/1.1
+                
+Host: 127.0.0.1:8080
+Accept: application/json
+Content-Type: application/json
+Content-Length: X
+
+{
+	"email": "jd@mail.com",
+	"name": "John",
+	"lastname": "Doe",
+	"motivation": "I like stagecast",
+  "company": "Stagecast"
+  ... all your additional parameters ... 
+}
+              </pre>
+            </div>
+
+          </div>
+
+          <div class="response">
+            <h5>Response</h5>
+            <div class="highlight">
+              <pre>
+HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 165
+Connection: close
+              </pre>
+            </div>
+          </div>
+
+          <div class="comment">
+            <h5>Comment</h5>
+            Nothing is returned in the registration. To obtain a token you need to login using the credentials submitted during activation.
+          </div>
+        </div>
+
+        <div id="section0.2" class="verb mt30">
+          <h2>0.2 Activating a user</h2>
+          <div class="request">
+            <h5>Request</h5>
+            <div class="highlight">
+              <pre>
+                
+POST /api/v1/users/activate HTTP/1.1
+
+Host: 127.0.0.1:8080
+Accept: application/json
+Content-Type: application/json
+Content-Length: X
+
+{
+"email": "name@domain.com",
+      "password": "some password",
+      ... any other user info we might have ...
+}
+              </pre>
+            </div>
+          </div>
+
+          <div class="response">
+            <h5>Response</h5>
+            <div class="highlight">
+              <pre>
+HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 165
+Connection: close
+              </pre>
+            </div>
+          </div>
+
+          <div class="comment">
+            <h5>Comment</h5>
+            Nothing is returned in the activation. To obtain a token you need to login using the credentials submitted during activation.
+          </div>
+        </div>
+
+        <div id="section0.3" class="verb mt30">
+          <h2>0.3 Logging in (stagecast login)</h2>
+
+          <div class="request">
+            <h5>Request</h5>
+            <div class="highlight">
+
+              <pre>
+POST /api/v1/users/login HTTP/1.1
+                
+Host: 127.0.0.1:8080
+Accept: application/json
+Content-Type: application/json
+Content-Length: X
+
+{
+"email": "name@domain.com",
+"password": "some password"
+}
+            </pre>
+            </div>
+          </div>
+
+          <div class="response">
+            <h5>Response</h5>
+            <div class="highlight">
+              <pre>
+HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 165
+Connection: close
+
+{
+"token": "secret token",
+      ...
+}
+              </pre>
+            </div>
+          </div>
+
+          <div class="comment">
+            <h5>Comment</h5>
+            On success a json document with a token is returned. Use this tokens in subsequent requests. The firstLogin field indicates if this is the first login that the user has ever done.
+          </div>
+        </div>
+
+        <div id="section0.4" class="verb mt30">
+          <h2>0.4 Getting all users</h2>
+
+          <div class="request">
+            <h5>Request</h5>
+            <div class="highlight">
+
+              <pre>
+GET /api/v1/users HTTP/1.1
+                
+Host: 127.0.0.1:8080
+Accept: application/json
+Content-Type: application/json
+X-Token: abc123
+Content-Length: X
+
+                
+              </pre>
+            </div>
+          </div>
+
+          <div class="response">
+            <h5>Response</h5>
+            <div class="highlight">
+              <pre>
+HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 165
+Connection: close
+
+[{"email": "abc@abc.com", "name": "Abc ", ...}, {"email": "mail@mail.com", ...}, ...]
+                </pre>
+            </div>
+          </div>
+
+          <div class="comment">
+            <h5>Comment</h5>
+            On success a json document with a list of users.
+          </div>
+        </div>
+
+        <div id="section0.5" class="verb mt30">
+          <h2>0.5 Getting a user</h2>
+
+          <div class="request">
+            <h5>Request</h5>
+            <div class="highlight">
+
+              <pre>
+GET /api/v1/users/{userid} HTTP/1.1
+              
+Host: 127.0.0.1:8080
+Accept: application/json
+Content-Type: application/json
+X-Token: abc123
+Content-Length: X
+
+              
+            </pre>
+            </div>
+          </div>
+
+          <div class="response">
+            <h5>Response</h5>
+            <div class="highlight">
+              <pre>
+HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 165
+Connection: close
+
+{"email": "abc@abc.com", "name": "Abc ", ...}
+              </pre>
+            </div>
+          </div>
+
+          <div class="comment">
+            <h5>Comment</h5>
+            On success a json document with the user.
+          </div>
+        </div>
+
+        <div id="section0.6" class="verb mt30">
+          <h2>0.6 Delete user</h2>
+
+          <div class="request">
+            <h5>Request</h5>
+            <div class="highlight">
+
+              <pre>
+DELETE /api/v1/users/{userid} HTTP/1.1
+            
+Host: 127.0.0.1:8080
+Accept: application/json
+Content-Type: application/json
+Content-Length: X
+
+            
+          </pre>
+            </div>
+          </div>
+
+          <div class="response">
+            <h5>Response</h5>
+            <div class="highlight">
+              <pre>
+HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 165
+Connection: close
+
+            </pre>
+            </div>
+          </div>
+
+          <div class="comment">
+            <h5>Comment</h5>
+            On success, no return. This api does not need a token for testing purposes.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+
+
+</body>
+
+</html>
