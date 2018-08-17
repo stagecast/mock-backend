@@ -68,6 +68,7 @@ module.exports = class UserController {
 
     if (!req.body.email || !req.body.motivation) {
       res.status(400).json({ success: false, message: "You must provide additional parameters." });
+      return;
     }
 
     let incomingUser = new this.User({
