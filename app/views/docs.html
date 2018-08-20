@@ -27,7 +27,32 @@
       </div>
     </div>
   </div>
-
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-10">
+        <h2>Index</h2>
+        <ul>
+          <li>
+            Users
+            <ul>
+              <li><a href="#section0.1">0.1 Registering a user</a></li>
+              <li><a href="#section0.2">0.2 Activating a user</a></li>
+              <li><a href="#section0.3">0.3 Logging in (stagecast login)</a></li>
+              <li><a href="#section0.4">0.4 Getting all users</a></li>
+              <li><a href="#section0.5">0.5 Getting a user</a></li>
+            </ul>
+          </li>
+          <li>
+            Events
+            <ul>
+              <li><a href="#section1.1">1.1 Getting all events</a></li>
+              <li><a href="#section1.2">1.2 Getting an event</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-10">
@@ -258,10 +283,7 @@ DELETE /api/v1/users/{userid} HTTP/1.1
 Host: 127.0.0.1:8080
 Accept: application/json
 Content-Type: application/json
-Content-Length: X
-
-            
-          </pre>
+Content-Length: X </pre>
             </div>
           </div>
 
@@ -272,15 +294,93 @@ Content-Length: X
 HTTP/1.1 200 OK
 Content-Type: application/json
 Content-Length: 165
-Connection: close
-
-            </pre>
+Connection: close</pre>
             </div>
           </div>
 
           <div class="comment">
             <h5>Comment</h5>
             On success, no return. This api does not need a token for testing purposes.
+          </div>
+        </div>
+
+        <h2 class="mt30">Events</h2>
+
+        <div id="section1.1" class="verb mt30">
+          <h2>1.1 Getting all events</h2>
+
+          <div class="request">
+            <h5>Request</h5>
+            <div class="highlight">
+
+              <pre>
+  GET /api/v1/events HTTP/1.1
+                
+  Host: 127.0.0.1:8080
+  Accept: application/json
+  Content-Type: application/json
+  Content-Length: X  
+              </pre>
+            </div>
+          </div>
+
+          <div class="response">
+            <h5>Response</h5>
+            <div class="highlight">
+              <pre>
+  HTTP/1.1 200 OK
+  Content-Type: application/json
+  Content-Length: 165
+  Connection: close
+  
+  [{"_id": "12345", "title": "Event.. ", ...}, {"_id": "12345", "title": "Event.. ", ...}]</pre>
+            </div>
+          </div>
+
+          <div class="comment">
+            <h5>Comment</h5>
+            This api donesn't need the auth token, for now. By specifing ?offset={number}&limit{number} it is possible to implement the pagination
+          </div>
+        </div>
+
+        <div id="section1.2" class="verb mt30">
+          <h2>1.2 Getting an event</h2>
+
+          <div class="request">
+            <h5>Request</h5>
+            <div class="highlight">
+
+              <pre>
+  GET /api/v1/events/{eventid} HTTP/1.1
+                
+  Host: 127.0.0.1:8080
+  Accept: application/json
+  Content-Type: application/json
+  X-Token: abc123
+  Content-Length: X
+    
+                  
+                </pre>
+            </div>
+          </div>
+
+          <div class="response">
+            <h5>Response</h5>
+            <div class="highlight">
+              <pre>
+  HTTP/1.1 200 OK
+  Content-Type: application/json
+  Content-Length: 165
+  Connection: close
+  
+  {"_id": "12345", "title": "Event.. ", ...}
+                  </pre>
+            </div>
+          </div>
+
+          <div class="comment">
+            <h5>Comment</h5>
+            This api donesn't need the auth token, for now.
           </div>
         </div>
 
