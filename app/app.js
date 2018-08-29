@@ -3,8 +3,11 @@ let express = require('express');
 let morgan = require('morgan');
 let bodyParser = require('body-parser');
 let jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
-let config = require('./config')
-  // App routes
+let config = require('./config');
+let cors = require('cors');
+
+
+// App routes
 const ApiController = require('./controllers/api.controller');
 const BaseController = require('./controllers/base.controller');
 const EventController = require('./controllers/event.controller');
@@ -26,6 +29,7 @@ module.exports = class App {
 
   setMiddlewares() {
     this.express.use(morgan('dev'));
+    this.express.use(cors({ origin: true, credentials: true }));
     this.express.use(bodyParser.json());
     this.express.use(bodyParser.urlencoded({ extended: false }));
 

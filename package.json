@@ -4,6 +4,7 @@
   "description": "Basic REST Service to make mock Stagecast backend",
   "main": "./dist/server.js",
   "dependencies": {
+    "cors": "^2.8.4",
     "express": "^4.16.3",
     "jsonwebtoken": "^8.3.0",
     "mongodb": "^3.1.3",
