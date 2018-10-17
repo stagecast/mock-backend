@@ -21,9 +21,17 @@ var UserModelSchema = new Schema({
     type: String,
     required: true
   },
+  role: {
+    type: String,
+    required: false
+  },
+  eventType: {
+    type: String,
+    required: false
+  },
   isActive: Boolean,
   password: String,
   phone: String
-});
+}, { strict: false });
 // db.users.createIndex({ "email": 1 }, { unique: true });
 module.exports = db.model('users', UserModelSchema);

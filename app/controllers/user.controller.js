@@ -66,19 +66,14 @@ module.exports = class UserController {
 
   Register(req, res) {
 
-    if (!req.body.email || !req.body.motivation) {
-      res.status(400).json({ success: false, message: "You must provide additional parameters." });
+    if (!req.body.email) {
+      res.status(400).json({ success: false, message: "You must provide the email." });
       return;
     }
-
-    let incomingUser = new this.User({
-      email: req.body.email,
-      name: req.body.name,
-      lastname: req.body.lastname,
-      company: req.body.company,
-      isActive: false,
-      phone: req.body.phone ? req.body.phone : '',
-    });
+    const user = req.body;
+    user.isActive = false;
+    console.log(req.body);
+    let incomingUser = new this.User(user);
 
     this.UserDB.insert(incomingUser)
       .then(result => result)
