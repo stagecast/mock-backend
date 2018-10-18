@@ -23,6 +23,7 @@ var UserModelSchema = new Schema({
   },
   role: {
     type: String,
+    enum: ['mobile', 'organiser'],
     required: false
   },
   eventType: {

@@ -52,10 +52,9 @@ module.exports = class UserController {
           return;
         }
 
-        res.json({
-          success: true,
-          message: 'Enjoy your token!',
-          token: this.generateToken(user)
+        res.status(200).json({
+          token: this.generateToken(user),
+          role: user.role ? user.role : 'mobile'
         });
 
       })
@@ -72,7 +71,11 @@ module.exports = class UserController {
     }
     const user = req.body;
     user.isActive = false;
-    console.log(req.body);
+
+    // if not role, add the default
+    if (!user.role) {
+      user.role = 'mobile';
+    }
     let incomingUser = new this.User(user);
 
     this.UserDB.insert(incomingUser)
@@ -103,6 +106,24 @@ module.exports = class UserController {
       .catch(error => res.sendStatus(404));
   };
 
+  Convert(req, res) {
+    if (!req.decoded) {
+      res.status(401).json({ success: false, message: 'Not Authorized' });
+
+    }
+    let email = req.decoded.email;
+    this.UserDB.get({ email }, { role: 1, _id: 0 })
+      .then(user => {
+        if (!user.role || user.role === 'mobile') {
+          req.body.role = 'organiser';
+        }
+        return this.UserDB.update({ email }, req.body)
+      })
+      .then(result => res.status(200).json(result))
+      .catch(error => res.status(400));
+
+  };
+
   // util 
   generateToken(user) {
     return jwt.sign({ email: user.email, isActive: user.isActive }, config.secret);
@@ -121,7 +142,7 @@ module.exports = class UserController {
       from: 'testermail110@gmail.com',
       to: `${user.email}, testermail110@gmail.com`,
       subject: `Register user ${user.name}`,
-      html: `<p>Your motivation: ${motivation} </p>Click <a href="http://localhost:4200/register/password?token=${token}">http://localhost:4200/register/password?token=${token}</a> to reset your password</p>`
+      html: `<p>Your motivation: ${motivation} </p>Click <a href="http://localhost:4200/register/password?token=${token}">http://localhost:4200/register/password?token=${token}</a> to complete your registration</p>`
     };
 
     try {
@@ -146,6 +167,7 @@ module.exports = class UserController {
       .delete("/:id", this.DeleteUser.bind(this))
       .post("/login", this.Login.bind(this))
       .post("/register", this.Register.bind(this))
+      .post("/convert", this.auth, this.Convert.bind(this))
       .post("/activate", this.Activate.bind(this));
   };
 }
